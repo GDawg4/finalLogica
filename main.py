@@ -30,7 +30,7 @@ final_states = [
 ]
 
 t = TuringMachine(
-    "000_",
+    "00000000_",
     initial_state='q1',
     final_states=final_states,
     transition_function=transition_function,
