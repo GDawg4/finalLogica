@@ -43,18 +43,33 @@ final_states = [
     "qR", 'qA'
 ]
 
-t = TuringMachine(
-    "10000_",
-    initial_state='q1',
-    final_states=final_states,
-    transition_function=transition_function,
-    blank_symbol="_"
-)
+files = [
+    'inputReject.txt', 'inputEnd.txt', 'inputLoop.txt'
+]
 
-print("Input on Tape:\n" + t.get_tape())
+for i in files:
+    file1 = open(i, 'r')
+    file2 = open('{}Out.txt'.format(i), 'w')
+    lines = file1.read()
 
-while not t.final():
-    t.step()
+    t = TuringMachine(
+        lines,
+        initial_state='q1',
+        final_states=final_states,
+        transition_function=transition_function,
+        blank_symbol="_"
+    )
 
-print("Result of the Turing machine calculation:")
-print(t.get_state())
+    print("Input on Tape:\n" + t.get_tape())
+
+    while not t.final():
+        t.step()
+
+    print("Result of the Turing machine calculation:")
+    print(t.get_state())
+    file2.write(t.get_state())
+    file2.write('\n')
+
+    file1.close()
+    file2.close()
+
